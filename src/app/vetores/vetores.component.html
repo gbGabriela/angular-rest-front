@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let estado of servico.listaEstados; let i = index">
+      <tr *ngFor="let estado of estados$ | async; let i = index">
         <td>{{estado.nome}}</td>
         <td>{{estado.sigla}}</td>
         <td>

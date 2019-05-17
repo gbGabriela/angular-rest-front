@@ -12,6 +12,7 @@ import { SomaComponent } from './soma/soma.component';
 import { FormsModule } from '@angular/forms';
 import { VetoresComponent } from './vetores/vetores.component';
 import { ServicoEstado } from './servicos/servico.estado';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ServicoEstado } from './servicos/servico.estado';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [ServicoEstado],
   bootstrap: [AppComponent]
