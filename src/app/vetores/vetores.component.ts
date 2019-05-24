@@ -8,27 +8,53 @@ import { Observable } from 'rxjs';
   ,templateUrl: 'vetores.component.html'
   ,styleUrls: ['vetores.component.html']
 })
+
 export class VetoresComponent implements OnInit{
 
   estados$ : Observable<Estado[]>;
+  estado: Estado = new Estado();
+  salvar: boolean = true;
 
   constructor(private servico: ServicoEstado){
 
   }
 
   ngOnInit(){
+    this.atualizar();
+  }
+
+  atualizar(){
     this.estados$ = this.servico.buscar();
   }
 
   adicionar() : void {
-    this.servico.adicionar();
+    if(this.salvar){
+      this.servico.adicionar(this.estado).subscribe(
+        () =>{
+          this.atualizar();
+          }
+      );
+    }else{
+      this.servico.alterar(this.estado).subscribe(
+        () =>{
+          this.atualizar();
+          }
+      );
+    }
+
+    this.estado = new Estado();
   }
 
-  excluir(i:number) : void {
-    this.servico.excluir(i);
+  excluir(id:number) : void {
+    this.servico.excluir(id).subscribe(
+      () =>{
+        this.atualizar();
+        }
+    );
   }
 
-  alterar(i:number) : void{
-    this.servico.alterar(i);
+  alterar(estado: Estado) : void{
+    this.estado = estado;
+    this.salvar = false;
   }
 }
